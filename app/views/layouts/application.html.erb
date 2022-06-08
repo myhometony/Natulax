@@ -11,6 +11,22 @@
   </head>
 
   <body>
+
+  <header>
+    <%= render 'layouts/header' %>
+  </header>
+
     <%= yield %>
+
+  <footer>
+    <% if admin_signed_in? %>
+    <% else %>
+      <li>
+        <%= link_to "ログイン", new_admin_session_path %>
+      </li>
+    <% end %>
+  </footer>
+
   </body>
+
 </html>
