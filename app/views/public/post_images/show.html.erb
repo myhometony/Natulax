@@ -1,11 +1,12 @@
 <div>
-  <%= image_tag @post_image.get_image %>
+  <%= image_tag @post_image.get_image(300,300) %>
   <p>タイトル：<%= @post_image.title %></p>
   <p>説明：<%= @post_image.caption %></p>
-  <p>投稿ユーザー画像：<%= image_tag 'sample-author1.jpg' %>
+  <p>投稿ユーザー画像：<%= image_tag @post_image.end_user.get_profile_image(100,100) %>
   <p>ユーザーネーム：<%= @post_image.end_user.name %></p>
   <p>投稿日：<%= @post_image.created_at.strftime('%Y/%m/%d') %></p>
   <% if @post_image.end_user == current_end_user %>
+  　<%= link_to "編集", edit_public_post_image_path(@post_image) %>
     <%= link_to "削除", public_post_image_path(@post_image), method: :delete %>
   <% end %>
 </div>

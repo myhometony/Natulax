@@ -1,12 +1,14 @@
 Rails.application.routes.draw do
+
   namespace :admin do
+    resources :end_users, only:[:index, :show, :update]
     resources :categories, only:[:index, :create, :edit, :update, :destroy]
-  end
-  namespace :admin do
     resources :post_images, only:[:index, :show, :destroy]
   end
+
   namespace :public do
     resources :post_images
+    resources :end_users
   end
 
   devise_for :admin, skip:[:registrations,:passwords],controllers:{

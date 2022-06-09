@@ -3,10 +3,16 @@
         <%= link_to "トップ", root_path %>
       </li>
       <li>
+      <%= link_to 'マイページ', public_end_user_path(current_end_user.id) %>
+      </li>
+      <li>
         <%= link_to '投稿フォーム', new_public_post_image_path %>
       </li>
       <li>
         <%= link_to "投稿画像一覧", public_post_images_path %>
+      </li>
+      <li>
+        <%= link_to "ユーザ一覧", public_end_users_path %>
       </li>
       <li>
         <%= link_to "ログアウト", destroy_end_user_session_path, method: :delete %>
@@ -14,6 +20,9 @@
     <% elsif admin_signed_in? %>
        <li>
         <%= link_to "トップ", root_path %>
+      </li>
+      <li>
+        <%= link_to "カテゴリ一覧", admin_categories_path %>
       </li>
       <li>
         <%= link_to "投稿画像一覧", admin_post_images_path %>

@@ -1,0 +1,9 @@
+<% @end_users.each do |end_user| %>
+<div>
+  <%= link_to public_end_user_path(end_user.id) do %>
+  <%= image_tag end_user.get_profile_image(100,100) %>
+  <% end %>
+  <p>ユーザ名：<%= end_user.name %></p>
+  <p>紹介文：<%= end_user.introduction %></p>
+</div>
+<% end %>

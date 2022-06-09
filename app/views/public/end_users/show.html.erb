@@ -1,7 +1,15 @@
+<div>
+  <h3><%= @end_user.name %></h3>
+  <%= image_tag @end_user.get_profile_image(100,100) %>
+  <% if @end_user == current_end_user %>
+  <p><%= link_to "プロフィール編集", edit_public_end_user_path(@end_user) %></p>
+  <% end %>
+</div>
+
 <% @post_images.each do |post_image| %>
 <div>
   <%= link_to public_post_image_path(post_image.id) do %>
-  <%= image_tag post_image.get_image(300,300) %>
+    <%= image_tag post_image.get_image(300,300) %>
   <% end %>
   <p>投稿ユーザー画像：<%= image_tag post_image.end_user.get_profile_image(100,100) %></p>
   <p>タイトル：<%= post_image.title %></p>
