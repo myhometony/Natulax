@@ -2,30 +2,41 @@
 <html>
   <head>
     <title>Natulax</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
+ <body class="d-flex flex-column vh-100">
 
-  <header>
+  <header class="shadow-sm">
     <%= render 'layouts/header' %>
   </header>
 
     <%= yield %>
 
-  <footer>
+    <footer class="bg-dark text-white pt-5 pb-4">
+      <div class="container">
+        <div class="row no-gutters">
+          <div class="col-md-4">
+            <p>©️natulax.inc</p>
+          </div>
+          <div class="col-md-8">
+            <ul class="p-0 list-unstyled">
     <% if admin_signed_in? %>
     <% else %>
-      <li>
+      <li class="nav-item">
         <%= link_to "ログイン", new_admin_session_path %>
       </li>
     <% end %>
-  </footer>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
 
   </body>
 

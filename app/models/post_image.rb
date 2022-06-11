@@ -3,7 +3,7 @@ class PostImage < ApplicationRecord
   has_one_attached :image
 
   belongs_to :end_user
-  #belongs_to :category
+  belongs_to :category
 
   def get_image(width, height)
     unless image.attached?

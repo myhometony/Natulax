@@ -8,6 +8,7 @@
 <% @categories.each do |category| %>
 <div>
   <p>カテゴリ名：<%= category.name %></p>
+  <%= link_to "編集", edit_admin_category_path(category.id) %>
   <%= link_to "削除", admin_category_path(category.id), method: :delete %>
 </div>
 <% end %>
