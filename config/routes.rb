@@ -1,6 +1,14 @@
 Rails.application.routes.draw do
 
+  root to: "homes#top"
 
+  devise_for :admin, skip:[:registrations,:passwords],controllers:{
+    sessions: "admin/sessions"
+  }
+  devise_for :end_users, controllers:{
+    registrations: "public/registrations",
+    sessions: "public/sessions"
+  }
 
   namespace :admin do
     resources :end_users, only:[:index, :show, :edit, :update]
@@ -13,6 +21,9 @@ Rails.application.routes.draw do
   end
 
   namespace :public do
+    get :"end_users/unsubscribe", to: "end_users#unsubscribe"
+    patch :"end_users/withdraw", to: "end_users#withdraw"
+
     resources :post_images do
       collection do
         get :search, to: "post_images#search"
@@ -21,12 +32,4 @@ Rails.application.routes.draw do
     resources :end_users
   end
 
-  devise_for :admin, skip:[:registrations,:passwords],controllers:{
-    sessions: "admin/sessions"
-  }
-  devise_for :end_users, controllers:{
-    registrations: "public/registrations",
-    sessions: "public/sessions"
-  }
-  root to: "homes#top"
 end

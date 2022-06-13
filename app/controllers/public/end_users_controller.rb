@@ -18,9 +18,20 @@ class Public::EndUsersController < ApplicationController
     redirect_to public_end_user_path
   end
 
+  def unsubscribe
+    @end_user = current_end_user
+  end
+
+  def withdraw
+    @end_user = current_end_user
+    @end_user.update(is_active: false)
+    reset_session
+    redirect_to root_path
+  end
+
   private
 
   def end_user_params
-    params.require(:end_user).permit(:profile_image, :name, :introduction, :is_active)
+    params.require(:end_user).permit(:profile_image, :name, :email, :introduction, :is_active)
   end
 end

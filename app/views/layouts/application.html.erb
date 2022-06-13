@@ -16,6 +16,12 @@
     <%= render 'layouts/header' %>
   </header>
 
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+    <% if flash[:danger] %>
+    <p class="text-red"><%= flash[:danger] %></p>
+    <% end %>
+
     <%= yield %>
 
     <footer class="bg-dark text-white pt-5 pb-4">

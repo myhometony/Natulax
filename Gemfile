@@ -62,3 +62,4 @@ end
 
 gem 'devise'
 gem 'ransack'
+gem 'devise-i18n'
