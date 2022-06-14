@@ -1,4 +1,6 @@
 class Public::EndUsersController < ApplicationController
+  before_action :ensure_guest_end_user, only:[:edit]
+
   def index
     @end_users = EndUser.all
   end
@@ -34,4 +36,12 @@ class Public::EndUsersController < ApplicationController
   def end_user_params
     params.require(:end_user).permit(:profile_image, :name, :email, :introduction, :is_active)
   end
+
+  def ensure_guest_end_user
+    @end_user = EndUser.find(params[:id])
+    if @end_user.name == "guestuser"
+      redirect_to public_end_user_path(current_end_user), notice:"ゲストユーザはプロフィール編集画面へ遷移できません。"
+    end
+  end
+
 end

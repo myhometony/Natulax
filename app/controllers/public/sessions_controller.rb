@@ -4,6 +4,12 @@ class Public::SessionsController < Devise::SessionsController
   # before_action :configure_sign_in_params, only: [:create]
   before_action :reject_inactive_end_user, only: [:create]
 
+  def guest_sign_in
+    end_user = EndUser.guest
+    sign_in end_user
+    redirect_to public_end_user_path(end_user), notice:"ゲストユーザとしてログインしました。"
+  end
+
   def reject_inactive_end_user
     @end_user = EndUser.find_by(email: params[:end_user][:email])
     if @end_user

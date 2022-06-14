@@ -1,8 +1,10 @@
 <div>
   <h3><%= @end_user.name %></h3>
   <%= image_tag @end_user.get_profile_image(100,100) %>
-  <% if @end_user == current_end_user %>
-  <p><%= link_to "プロフィール編集", edit_public_end_user_path(@end_user) %></p>
+  <% if @end_user.name !="guestuser" %>
+    <% if @end_user == current_end_user %>
+    <p><%= link_to "プロフィール編集", edit_public_end_user_path(@end_user) %></p>
+    <% end %>
   <% end %>
 </div>
 
