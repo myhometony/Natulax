@@ -1,4 +1,5 @@
 class Admin::PostImagesController < ApplicationController
+  before_action :search,only: [:index]
 
   def index
     @post_images = PostImage.all
@@ -6,6 +7,7 @@ class Admin::PostImagesController < ApplicationController
 
   def show
     @post_image = PostImage.find(params[:id])
+    @comment = Comment.new
   end
 
   def edit
@@ -23,20 +25,14 @@ class Admin::PostImagesController < ApplicationController
     redirect_to admin_post_images_path
   end
 
-  def search_drink
-    @results = @p.result
-    #検索結果を取得
+  def search
+    @search = PostImage.ransack(params[:q])#キー(:q)を使ってテーブルから情報を取得
+    @results = @search.result#検索結果を取得
   end
 
   private
 
   def post_image_params
-    params.require(:post_image).permit(:image, :end_user_id, :title, :caption)
+    params.require(:post_image).permit(:image, :end_user_id, :category_id, :title, :caption)
   end
-
-  def create_searching_object
-    @p = PostImage.ransack(params[:q])
-    #キー(:q)を使ってテーブルから情報を取得
-  end
-
 end

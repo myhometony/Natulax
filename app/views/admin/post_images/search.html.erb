@@ -1,0 +1,39 @@
+<h1>
+  検索結果
+</h1>
+<%# 検索結果の個数で条件分岐 %>
+<% if @results.length !=0 %>
+
+  <%  @results.each do |post_image| %>
+
+  <div class='main'>
+  <div class='item-contents'>
+    <h2 class='title'></h2>
+    <ul class='item-lists'>
+      <%if post_image%>
+      <li class='list'>
+        <%= link_to public_post_image_path(post_image.id) do %>
+        <div class='item-img-content'>
+          <%= image_tag post_image.get_image(300,300) , class: "item-img" if post_image.image.attached? %>
+        </div>
+        <% end %>
+        <div class='item-info'>
+          <h3 class='item-name'>タイトル: <%= post_image.title %></h3>
+          <div class='item-price'>
+            <span>説明: <%= post_image.caption %></span>
+            <div class='star-btn'><span class='star-count'><%= post_image.end_user.name %></span></div>
+          </div>
+        </div>
+          <div class="item-delete"><%= link_to "削除する",public_post_image_path(post_image),method: :delete %></div>
+      </li>
+    </ul>
+  </div>
+    <%end%>
+  </div>
+  <% end %>
+
+<% else %>
+  該当する商品はありません
+<% end %>
+<br>
+<%= link_to 'トップページへ戻る', root_path %>

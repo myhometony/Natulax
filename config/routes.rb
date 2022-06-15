@@ -21,6 +21,7 @@ Rails.application.routes.draw do
       collection do
         get :search, to: "post_images#search"
       end
+      resources :comments, only:[:destroy]
     end
   end
 
@@ -32,6 +33,8 @@ Rails.application.routes.draw do
       collection do
         get :search, to: "post_images#search"
       end
+      resource :favorites, only:[:create, :destroy]
+      resources :comments, only:[:create, :destroy]
     end
     resources :end_users
   end

@@ -1,4 +1,5 @@
 class Public::EndUsersController < ApplicationController
+  before_action :authenticate_end_user!, except: [:top]
   before_action :ensure_guest_end_user, only:[:edit]
 
   def index

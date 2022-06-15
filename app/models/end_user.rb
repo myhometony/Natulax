@@ -5,8 +5,10 @@ class EndUser < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :post_images, dependent: :destroy
+  has_many :favorites, dependent: :destroy
+  has_many :comments, dependent: :destroy
 
-  #scope :only_active, -> { where(is_active: true) }
+  scope :only_active, -> { where(is_active: true) }
 
   validates :name, presence: true
   validates :email, presence: true, uniqueness: true
