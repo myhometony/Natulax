@@ -35,5 +35,8 @@
 <% else %>
   該当する商品はありません
 <% end %>
+
+<%= paginate @results %>
+
 <br>
 <%= link_to 'トップページへ戻る', root_path %>

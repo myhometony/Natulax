@@ -2,7 +2,7 @@ class Public::PostImagesController < ApplicationController
   before_action :search,only: [:index]
 
   def index
-    @post_images = PostImage.all
+    @post_images = PostImage.page(params[:page])
   end
 
   def new
@@ -38,7 +38,7 @@ class Public::PostImagesController < ApplicationController
 
   def search
     @search = PostImage.ransack(params[:q])#キー(:q)を使ってテーブルから情報を取得
-    @results = @search.result#検索結果を取得
+    @results = @search.result.page(params[:page])#.resultで検索結果を取得
   end
 
   private

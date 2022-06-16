@@ -10,40 +10,26 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
- <body class="d-flex flex-column vh-100">
+  <body class="d-flex flex-column vh-100">
 
-  <header class="shadow-sm">
-    <%= render 'layouts/header' %>
-  </header>
+    <header class="bg-success">
+      <%= render 'layouts/header' %>
+    </header>
 
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
-    <% if flash[:danger] %>
-    <p class="text-red"><%= flash[:danger] %></p>
-    <% end %>
+    <% if flash[:danger] %><p class="text-red"><%= flash[:danger] %></p><% end %>
 
-    <%= yield %>
+    <main class="mb-auto">
+      <%= yield %>
+    </main>
 
-    <footer class="bg-dark text-white pt-5 pb-4">
-      <div class="container">
-        <div class="row no-gutters">
-          <div class="col-md-4">
-            <p>©️natulax.inc</p>
-          </div>
-          <div class="col-md-8">
-            <ul class="p-0 list-unstyled">
-    <% if admin_signed_in? %>
-    <% else %>
-      <li class="nav-item">
-        <%= link_to "ログイン", new_admin_session_path %>
-      </li>
-    <% end %>
-            </ul>
-          </div>
-        </div>
-      </div>
+    <footer class="bg-success pt-5 pb-4">
+      <% if admin_signed_in? %>
+      <% else %>
+       <%= link_to "ログイン", new_admin_session_path %>
+      <% end %>
     </footer>
 
   </body>
-
 </html>

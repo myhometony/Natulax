@@ -12,3 +12,5 @@
   <%= link_to "削除", admin_category_path(category.id), method: :delete %>
 </div>
 <% end %>
+
+<%= paginate @categories %>
