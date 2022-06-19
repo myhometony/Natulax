@@ -1,11 +1,32 @@
-<% @end_users.each do |end_user| %>
-<div>
-  <%= link_to admin_end_user_path(end_user.id) do %>
-  <%= image_tag end_user.get_profile_image(100,100) %>
-  <% end %>
-  <p>ユーザ名：<%= end_user.name %></p>
-  <p>紹介文：<%= end_user.introduction %></p>
+<div class="container">
+  <h4>ユーザ一覧</h4>
+  <table class="table">
+    <thead>
+      <tr class="table-info">
+        <th>ユーザID</th>
+        <th>ユーザ名</th>
+        <th>ステータス</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @end_users.each do |end_user| %>
+      <tr>
+        <td><%= end_user.id %></td>
+        <td><%= end_user.name %></td>
+        <td>
+          <% if end_user.is_active == true %>
+          <span>有効</span>
+          <% else %>
+          <span class="text-danger">退会済み</span>
+          <% end %>
+        </td>
+      　<td><%= link_to "編集", edit_admin_end_user_path(end_user.id),class:"btn btn-success" %></td>
+    　</tr>
+    　<% end %>
+    </tbody>
+  </table>
+  <div>
+    <%= paginate @end_users %>
+  </div>
 </div>
-<% end %>
-
-<%= paginate @end_users %>
