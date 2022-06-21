@@ -1,10 +1,12 @@
-<div>
-  <h2>本当に退会しますか？</h2>
-  <div>
+<div class="container">
+  <div class="row m-3">
+  <h4>本当に退会しますか？</h4>
+  </div>
+  <div class="row m-3">
     <p>退会する場合は、『退会する』をクリックしてください。</p>
   </div>
-  <div>
-    <%= link_to '退会しない', public_end_user_path(@end_user) %>
-    <%= link_to "退会する", public_end_users_withdraw_path(@end_user), method: :patch %>
+  <div class="row m-3">
+    <%= link_to '退会しない', public_end_user_path(@end_user),class:"btn btn-primary mr-3" %>
+    <%= link_to "退会する", public_end_users_withdraw_path(@end_user), method: :patch,class:"btn btn-danger" %>
   </div>
 </div>

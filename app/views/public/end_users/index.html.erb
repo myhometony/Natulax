@@ -1,11 +1,24 @@
-<% @end_users.each do |end_user| %>
-<div>
-  <%= link_to public_end_user_path(end_user.id) do %>
-  <%= image_tag end_user.get_profile_image(100,100) %>
-  <% end %>
-  <p>ユーザ名：<%= end_user.name %></p>
-  <p>紹介文：<%= end_user.introduction %></p>
+<div class="container">
+  <h4>ユーザ一覧</h4>
+  <table class="table">
+    <thead>
+      <tr class="table-info">
+        <th></th>
+        <th>ユーザ名</th>
+        <th>紹介文</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @end_users.each do |end_user| %>
+      <tr>
+        <td><%= link_to public_end_user_path(end_user.id) do %><%= image_tag end_user.get_profile_image(100,100),class:"rounded-circle" %><% end %></td>
+        <td><%= end_user.name %></td>
+        <td><%= end_user.introduction %></td>
+    　</tr>
+    　<% end %>
+    </tbody>
+  </table>
+  <div>
+    <%= paginate @end_users %>
+  </div>
 </div>
-<% end %>
-
-<%= paginate @end_users %>
