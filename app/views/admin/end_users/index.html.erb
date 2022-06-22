@@ -15,13 +15,13 @@
         <td><%= end_user.id %></td>
         <td><%= end_user.name %></td>
         <td>
-          <% if end_user.is_active == true %>
-          <span>有効</span>
+          <% if end_user.is_active %>
+          <span class="text-success">有効</span>
           <% else %>
           <span class="text-danger">退会済み</span>
           <% end %>
         </td>
-      　<td><%= link_to "編集", edit_admin_end_user_path(end_user.id),class:"btn btn-success" %></td>
+      　<td><%= link_to "詳細", admin_end_user_path(end_user.id),class:"btn btn-success" %></td>
     　</tr>
     　<% end %>
     </tbody>

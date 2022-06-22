@@ -11,7 +11,7 @@
     <tbody>
       <% @end_users.each do |end_user| %>
       <tr>
-        <td><%= link_to public_end_user_path(end_user.id) do %><%= image_tag end_user.get_profile_image(100,100),class:"rounded-circle" %><% end %></td>
+        <td><%= link_to public_end_user_path(end_user.id) do %><%= image_tag end_user.get_profile_image(100,100),class:"rounded-circle border" %><% end %></td>
         <td><%= end_user.name %></td>
         <td><%= end_user.introduction %></td>
     　</tr>

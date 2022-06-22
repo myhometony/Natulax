@@ -4,10 +4,14 @@ class Public::SessionsController < Devise::SessionsController
   # before_action :configure_sign_in_params, only: [:create]
   before_action :reject_inactive_end_user, only: [:create]
 
+  def after_sign_in_path_for(resource)
+    public_post_images_path
+  end
+
   def guest_sign_in
     end_user = EndUser.guest
     sign_in end_user
-    redirect_to public_end_user_path(end_user), notice:"ゲストユーザとしてログインしました。"
+    redirect_to public_post_images_path, notice:"ゲストユーザとしてログインしました。"
   end
 
   def reject_inactive_end_user
@@ -41,8 +45,4 @@ class Public::SessionsController < Devise::SessionsController
   # def configure_sign_in_params
   #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
   # end
-  def after_sign_in_path_for(resource)
-    public_post_images_path
-  end
-
 end

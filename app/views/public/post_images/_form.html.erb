@@ -1,0 +1,21 @@
+  <div class="row">
+    <%= form_with model: post_image, url:url do |f| %>
+    <div class="form_group mt-3">
+      <label for="inputImage">投稿画像</label>
+      <%= f.file_field :image, accept: "image/*", id:"inputImage",class:"form-control-file" %>
+    </div>
+    <div class="form_group mt-3">
+      <label for="inputIntroduction">カテゴリ</label>
+      <%= f.collection_select :category_id, Category.all, :id, :name, class:"custom-select" %>
+    </div>
+    <div class="form_group">
+      <label for="inputTitle">タイトル</label>
+      <%= f.text_field :title, id:"inputTitle", placeholder:"タイトル",class:"form-control" %>
+    </div>
+    <div class="form_group mt-3">
+      <label for="inputCaption">説明文</label>
+      <%= f.text_area :caption,id:"inputCaption", placeholder:"説明文",class:"form-control" %>
+    </div>
+    <%= f.submit submit, class:"btn btn-primary mt-3"  %>
+    <% end %>
+  </div>

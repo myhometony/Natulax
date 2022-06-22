@@ -10,10 +10,6 @@ class Admin::EndUsersController < ApplicationController
     @post_images = @end_user.post_images
   end
 
-  def edit
-    @end_user = EndUser.find(params[:id])
-  end
-
   def update
     @end_user = EndUser.find(params[:id])
     @end_user.update(end_user_params)
