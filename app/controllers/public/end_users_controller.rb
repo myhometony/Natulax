@@ -8,7 +8,8 @@ class Public::EndUsersController < ApplicationController
 
   def show
     @end_user = EndUser.find(params[:id])
-    @post_images = @end_user.post_images
+    @search = @end_user.post_images.ransack(params[:q])#キー(:q)を使ってテーブルから情報を取得
+    @results = @search.result.page(params[:page]).per(6)#.resultで検索結果を取得
   end
 
   def edit

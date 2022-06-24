@@ -1,11 +1,8 @@
-<%= search_form_for @search, url: search_public_post_images_path do |f| %>
-  <%= f.search_field :title_cont%><%# _contはidでない文字列のときに使う%>
-  <p>カテゴリ検索</p>
-  <%= f.label 'カテゴリ'%>
-  <%= f.collection_select :category_id_eq,Category.all,:id,:name,include_blank: '指定なし' %>
-  <%= f.submit '検索' %>
+<%= render 'search_form', search:@search, url: public_post_images_path %>
+
+<% if @results.length !=0 %>
+  <%= render 'index', post_images:@results %>
+  <%= paginate @results %>
+<% else %>
+  該当する投稿が見つかりませんでした。
 <% end %>
-
-<%= render 'index', post_images:@post_images %>
-
-<%= paginate @post_images %>

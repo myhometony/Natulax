@@ -40,5 +40,11 @@
   </table>
 </div>
 
-<h3>ユーザの投稿</h3>
-<%= render 'admin/post_images/index', post_images:@post_images %>
+<h3>投稿一覧</h3>
+<%= render 'admin/post_images/search_form', search:@search, url: admin_end_user_path %>
+<% if @results.length !=0 %>
+  <%= render 'admin/post_images/index', post_images:@results %>
+  <%= paginate @results %>
+<% else %>
+  該当する投稿が見つかりませんでした。
+<% end %>

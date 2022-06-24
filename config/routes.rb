@@ -18,9 +18,6 @@ Rails.application.routes.draw do
     resources :end_users, only:[:index, :show, :update]
     resources :categories, only:[:index, :create, :edit, :update, :destroy]
     resources :post_images, only:[:index, :show, :edit, :destroy] do
-      collection do
-        get :search, to: "post_images#search"
-      end
       resources :comments, only:[:destroy]
     end
   end
@@ -28,15 +25,11 @@ Rails.application.routes.draw do
   namespace :public do
     get :"end_users/unsubscribe", to: "end_users#unsubscribe"
     patch :"end_users/withdraw", to: "end_users#withdraw"
-
+    resources :end_users, only:[:index, :show, :edit, :update]
     resources :post_images do
-      collection do
-        get :search, to: "post_images#search"
-      end
       resource :favorites, only:[:create, :destroy]
       resources :comments, only:[:create, :destroy]
     end
-    resources :end_users
   end
 
 end

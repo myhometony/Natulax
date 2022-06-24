@@ -1,51 +1,33 @@
-<div class="card-list-container py-5">
+<div class="card-columns p-3">
   <% post_images.each do |post_image| %>
-  <div class="card w-50 mx-auto mt-4 shadow-lg">
-    <%= link_to public_post_image_path(post_image.id) do %>
-      <%= image_tag post_image.get_image(200,200), class:"card-img-top"; %>
-    <% end %>
+  <div class="card">
+      <%= link_to public_post_image_path(post_image.id) do %>
+        <%= image_tag post_image.get_image(400,400), class:"card-img-top" %>
+      <% end %>
     <div class="card-body">
-      <div class="row">
-        <div class="col-2">
-          <%= image_tag post_image.end_user.get_profile_image(100,100), class:"m-3 rounded-circle"; %>
-        </div>
-        <div class="col-10">
-          <p class="card-title">
-            <%= link_to(public_post_image_path(post_image.id), class:"text-dark") do %>
-              <strong><i class="far fa-flag"></i><span> <%= post_image.title %></span></strong>
-            <% end %>
-          </p>
-          <p class="card-text">説明：<%= post_image.caption %></p>
-          <span><i class="fas fa-user"></i> By <%= post_image.end_user.name %> ｜ </span>
-          <span><%= link_to "#{post_image.comments.count} コメント", public_post_image_path(post_image.id), class:"text-dark" %></span>
-          <% if post_image.favorited_by?(current_end_user) %>
-          <p>
-            <%= link_to public_post_image_favorites_path(post_image), method: :delete do %>
+      <b><i class="fa-solid fa-camera"></i>:<%= post_image.title %></b>
+      <p><%= post_image.caption %></p>
+      <span>
+        <%= link_to public_post_image_path(post_image.id) do %>
+          <%= image_tag post_image.end_user.get_profile_image(50,50), class:"m-3 rounded-circle border" %>
+          <%= post_image.end_user.name %>
+        <% end %>
+         |
+        <% if post_image.favorited_by?(current_end_user) %>
+          <%= link_to public_post_image_favorites_path(post_image), method: :delete do %>
             <i class="fa-solid fa-heart text-danger"></i><%= post_image.favorites.count %> いいね
-            <% end %>
-          </p>
-          <% else %>
-          <p>
-            <%= link_to public_post_image_favorites_path(post_image), method: :post do %>
-            ♡<%= post_image.favorites.count %> いいね
-            <% end %>
-            </p>
           <% end %>
-        </div>
-      </div>
+        <% else %>
+          <%= link_to public_post_image_favorites_path(post_image), method: :post do %>
+            ♡<%= post_image.favorites.count %> いいね
+          <% end %>
+        <% end %>
+         |
+        <%= link_to  public_post_image_path(post_image.id) do %>
+          <i class="fa-regular fa-comment-dots"></i><%= post_image.comments.count %> コメント
+        <% end %>
+      </span>
     </div>
   </div>
   <% end %>
 </div>
-
-<% post_images.each do |post_image| %>
-<div>
-  <%= link_to public_post_image_path(post_image.id) do %>
-  <%= image_tag post_image.get_image(300,300) %>
-  <% end %>
-  <p>投稿ユーザー画像：<%= image_tag post_image.end_user.get_profile_image(100,100) %></p>
-  <p>タイトル：<%= post_image.title %></p>
-  <p>説明：<%= post_image.caption %></p>
-  <p>ユーザーネーム：<%= post_image.end_user.name %></p>
-</div>
-<% end %>
