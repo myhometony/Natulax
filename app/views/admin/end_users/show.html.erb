@@ -1,7 +1,9 @@
 <div class="container">
-  <h4><%= @end_user.name %></h4>
-  <%= image_tag @end_user.get_profile_image(100,100),class:"rounded-circle border" %>
-  <table class="table">
+  <div class="col-3 text-center">
+    <h4><%= @end_user.name %></h4>
+    <%= image_tag @end_user.get_profile_image(100,100),class:"rounded-circle border" %>
+  </div>
+  <table class="table text-center">
     <thead>
       <tr class="table-info">
         <th></th>

@@ -1,14 +1,17 @@
 class Admin::EndUsersController < ApplicationController
   before_action :authenticate_admin!, except: [:top]
 
-  def index
-    @end_users = EndUser.page(params[:page])
+  def index#一覧と検索結果を一体化してあります。
+    @search = EndUser.ransack(params[:q])#キー(:q)を使ってテーブルから情報を取得
+    @results = @search.result.page(params[:page]).order(created_at: :desc)#orderで順番入れかえ
+    #検索結果を取得
   end
 
   def show
     @end_user = EndUser.find(params[:id])
-    @search = PostImage.ransack(params[:q])#キー(:q)を使ってテーブルから情報を取得
-    @results = @search.result.page(params[:page]).per(6)#検索結果を取得
+    @search = @end_user.post_images.ransack(params[:q])#キー(:q)を使ってテーブルから情報を取得
+    @results = @search.result.page(params[:page]).per(6).order(created_at: :desc)#orderで順番入れかえ
+    #検索結果を取得
   end
 
   def update

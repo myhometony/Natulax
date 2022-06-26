@@ -5,6 +5,12 @@ class ApplicationController < ActionController::Base
     root_path
   end
 
+  def guest?#ゲストユーザの利用制限
+    if current_end_user.name == "ゲストユーザ"
+      redirect_to public_post_images_path, notice:"ゲストユーザではご利用いただけません。"
+    end
+  end
+
   protected
 
   def configure_permitted_parameters

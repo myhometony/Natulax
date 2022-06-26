@@ -1,24 +1,39 @@
 <div class="container">
-  <h4>ユーザ一覧</h4>
-  <table class="table">
-    <thead>
-      <tr class="table-info">
-        <th></th>
-        <th>ユーザ名</th>
-        <th>紹介文</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @end_users.each do |end_user| %>
-      <tr>
-        <td><%= link_to public_end_user_path(end_user.id) do %><%= image_tag end_user.get_profile_image(100,100),class:"rounded-circle border" %><% end %></td>
-        <td><%= end_user.name %></td>
-        <td><%= end_user.introduction %></td>
-    　</tr>
-    　<% end %>
-    </tbody>
-  </table>
-  <div>
-    <%= paginate @end_users %>
+  <div class="form-inline ml-3">
+    <h4>ユーザ一覧</h4>
+    <div class="ml-4">
+      <%= search_form_for @search, url:public_end_users_path do |f| %>
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <%= f.search_field :name_cont, placeholder:"ユーザ検索" %><%# _contはidでない文字列のときに使う%>
+        <%= f.submit '検索',class:"btn btn-primary" %>
+      <% end %>
+    </div>
   </div>
+  <% if @results.length !=0 %>
+    <table class="table text-center">
+      <thead>
+        <tr class="table-info">
+          <th></th>
+          <th>ユーザ名</th>
+          <th>紹介文</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @results.each do |end_user| %>
+          <tr>
+            <td>
+              <%= link_to public_end_user_path(end_user.id) do %>
+                <%= image_tag end_user.get_profile_image(100,100),class:"rounded-circle border" %>
+              <% end %>
+            </td>
+            <td><%= end_user.name %></td>
+            <td><%= end_user.introduction %></td>
+    　     </tr>
+    　   <% end %>
+      </tbody>
+    </table>
+    <%= paginate @results %>
+  <% else %>
+    該当するユーザが見つかりませんでした。
+  <% end %>
 </div>

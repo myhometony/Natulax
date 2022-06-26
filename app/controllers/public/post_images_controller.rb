@@ -1,8 +1,10 @@
 class Public::PostImagesController < ApplicationController
+  before_action :guest?, only:[:new]#ゲストユーザの利用制限、application_controllerに記載
 
   def index#投稿一覧と検索結果を一体化してあります。
     @search = PostImage.ransack(params[:q])#キー(:q)を使ってテーブルから情報を取得
-    @results = @search.result.page(params[:page]).per(6)#.resultで検索結果を取得
+    @results = @search.result.page(params[:page]).per(6).order(created_at: :desc)#orderで順番入れかえ
+    #.resultで検索結果を取得
   end
 
   def new

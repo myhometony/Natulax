@@ -1,7 +1,10 @@
 class Admin::CategoriesController < ApplicationController
-  def index
+
+  def index#一覧と検索結果を一体化してあります。
     @category = Category.new
-    @categories = Category.page(params[:page])
+    @search = Category.ransack(params[:q])#キー(:q)を使ってテーブルから情報を取得
+    @results = @search.result.page(params[:page]).order(created_at: :desc)#orderで順番入れかえ
+    #検索結果を取得
   end
 
   def create
@@ -29,4 +32,5 @@ class Admin::CategoriesController < ApplicationController
   def category_params
     params.require(:category).permit(:name)
   end
+
 end

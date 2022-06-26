@@ -1,15 +1,18 @@
 class Public::EndUsersController < ApplicationController
   before_action :authenticate_end_user!, except: [:top]
-  before_action :ensure_guest_end_user, only:[:edit]
+  before_action :guest?, only:[:edit]#ゲストユーザの利用制限、application_controllerに記載
 
-  def index
-    @end_users = EndUser.page(params[:page])
+  def index#一覧と検索結果を一体化してあります。
+    @search = EndUser.ransack(params[:q])#キー(:q)を使ってテーブルから情報を取得
+    @results = @search.result.page(params[:page]).order(created_at: :desc)#orderで順番入れかえ
+    #検索結果を取得
   end
 
   def show
     @end_user = EndUser.find(params[:id])
     @search = @end_user.post_images.ransack(params[:q])#キー(:q)を使ってテーブルから情報を取得
-    @results = @search.result.page(params[:page]).per(6)#.resultで検索結果を取得
+    @results = @search.result.page(params[:page]).per(6).order(created_at: :desc)#orderで順番入れかえ
+    #.resultで検索結果を取得
   end
 
   def edit
@@ -37,13 +40,6 @@ class Public::EndUsersController < ApplicationController
 
   def end_user_params
     params.require(:end_user).permit(:profile_image, :name, :email, :introduction, :is_active)
-  end
-
-  def ensure_guest_end_user
-    @end_user = EndUser.find(params[:id])
-    if @end_user.name == "ゲストユーザ"
-      redirect_to public_end_user_path(current_end_user), notice:"ゲストユーザはプロフィール編集画面へ遷移できません。"
-    end
   end
 
 end

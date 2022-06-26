@@ -12,7 +12,7 @@
 慣れない環境への変化にストレスを抱えている人も多いのではないでしょうか。
 そんな中で、少しでも自然の画像を眺めて気晴らしになれば幸いです。
 自然の画像を共有・閲覧することで日常に自然の癒しの提供を目的としているコミュニティサイトです。
-利用者に自然を手軽に取り入れ、身近に感じ、日常に癒しになったら良いなという思いで作成しました。
+利用者に自然を手軽に取り入れ、身近に感じ、日常の癒しになれば良いなと思います。
 
 ### ターゲットユーザ
 - 自然を感じたいが身近に自然がない人
@@ -25,7 +25,8 @@
 - 自然の写真を共有したいとき
 
 ## 設計書
-
+- ER図　https://drive.google.com/file/d/11T02juifEpae1tL4IM4Zm32G4q1PYOCQ/view?usp=sharing
+- テーブル定義書　https://docs.google.com/spreadsheets/d/1yN9UehVLrJEOFsO0gKnIJSrtSEQtsG_yDq7u7foS1QY/edit?usp=sharing
 
 ## 開発環境
 - OS：Linux(CentOS)
@@ -35,5 +36,5 @@
 - IDE：Cloud9
 
 ## 使用素材
-- https://pixabay.com/ja/
-- https://icooon-mono.com/
+- pixabay　https://pixabay.com/ja/
+- icooon-mono　https://icooon-mono.com/

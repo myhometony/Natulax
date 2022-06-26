@@ -1,35 +1,36 @@
 <div class="container">
-
-    <%= image_tag @post_image.get_image(900,900) %>
-
-  <div class="row">
-    <div class="col">
-        タイトル：<%= @post_image.title %>
-        カテゴリ：<%= @post_image.category.name %>
-        説明文：<%= @post_image.caption %>
-        <%= link_to public_end_user_path do %>
-        <p><%= image_tag @post_image.end_user.get_profile_image(100,100),class:"rounded-circle border" %>
-        <p><%= @post_image.end_user.name %></p>
+  <div class="row m-3">
+    <div class="col-12">
+      <%= image_tag @post_image.get_image(1000,1000), class:"img-fluid" %>
+    </div>
+    <div class="col-4 m-3">
+      <p>
+        <%= link_to public_end_user_path(@post_image.end_user.id) do %>
+          <%= image_tag @post_image.end_user.get_profile_image(100,100),class:"rounded-circle border" %>
+          <%= @post_image.end_user.name %>
         <% end %>
-        <p>投稿日：<%= @post_image.created_at.strftime('%Y.%m.%d') %></p>
-        <% if @post_image.end_user == current_end_user %>
-        <%= link_to "編集", edit_public_post_image_path(@post_image),class:"btn btn-success" %>
-        <%= link_to "削除", public_post_image_path(@post_image), method: :delete,class:"btn btn-danger" %>
-        <% end %>
+      </p>
+      <p>タイトル：<%= @post_image.title %></p>
+      <p>説明文：<%= @post_image.caption %></p>
+      <p>カテゴリ：<%= @post_image.category.name %></p>
+      <p>投稿日：<%= @post_image.created_at.strftime('%Y.%m.%d') %></p>
+      <p>
         <% if @post_image.favorited_by?(current_end_user) %>
-        <p>
           <%= link_to public_post_image_favorites_path(@post_image), method: :delete do %>
             <i class="fa-solid fa-heart text-danger"></i><%= @post_image.favorites.count %> いいね
           <% end %>
-        </p>
         <% else %>
-        <p>
           <%= link_to public_post_image_favorites_path(@post_image), method: :post do %>
             ♡<%= @post_image.favorites.count %> いいね
           <% end %>
-        </p>
         <% end %>
-        <p>コメント数：<%= @post_image.comments.count %></p>
+        |
+        <i class="fa-regular fa-comment-dots"></i><%= @post_image.comments.count %>コメント
+      </p>
+      <% if @post_image.end_user == current_end_user %>
+        <%= link_to "編集", edit_public_post_image_path(@post_image),class:"btn btn-success" %>
+        <%= link_to "削除", public_post_image_path(@post_image), method: :delete,class:"btn btn-danger" %>
+      <% end %>
     </div>
 
     <%= render "comment", post_image:@post_image, comment:@comment %>

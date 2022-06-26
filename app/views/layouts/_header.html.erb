@@ -7,20 +7,22 @@
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
       <ul class="navbar-nav ml-auto">
         <% if end_user_signed_in? %>
-        <li class="nav-item"><%= link_to 'マイページ', public_end_user_path(current_end_user.id), class: 'nav-link text-white' %></li>
-        <li class="nav-item"><%= link_to '投稿フォーム', new_public_post_image_path, class: 'nav-link text-white' %></li>
-        <li class="nav-item"><%= link_to "投稿画像一覧", public_post_images_path, class: 'nav-link text-white' %></li>
-        <li class="nav-item"><%= link_to "ユーザ一覧", public_end_users_path, class: 'nav-link text-white' %></li>
-        <li class="nav-item"><%= link_to "ログアウト", destroy_end_user_session_path, method: :delete, class: 'nav-link text-white' %></li>
+          <li class="nav-item"><%= link_to 'マイページ', public_end_user_path(current_end_user.id), class: 'nav-link text-white' %></li>
+          <% unless current_end_user.name == "ゲストユーザ" %>
+            <li class="nav-item"><%= link_to '投稿フォーム', new_public_post_image_path, class: 'nav-link text-white' %></li>
+          <% end %>
+          <li class="nav-item"><%= link_to "投稿画像一覧", public_post_images_path, class: 'nav-link text-white' %></li>
+          <li class="nav-item"><%= link_to "ユーザ一覧", public_end_users_path, class: 'nav-link text-white' %></li>
+          <li class="nav-item"><%= link_to "ログアウト", destroy_end_user_session_path, method: :delete, class: 'nav-link text-white' %></li>
         <% elsif admin_signed_in? %>
-        <li class="nav-item"><%= link_to "ユーザ一覧", admin_end_users_path, class: 'nav-link text-white' %></li>
-        <li class="nav-item"><%= link_to "カテゴリ一覧", admin_categories_path, class: 'nav-link text-white' %></li>
-        <li class="nav-item"><%= link_to "投稿画像一覧", admin_post_images_path, class: 'nav-link text-white' %></li>
-        <li class="nav-item"><%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: 'nav-link text-white' %></li>
+          <li class="nav-item"><%= link_to "ユーザ一覧", admin_end_users_path, class: 'nav-link text-white' %></li>
+          <li class="nav-item"><%= link_to "カテゴリ一覧", admin_categories_path, class: 'nav-link text-white' %></li>
+          <li class="nav-item"><%= link_to "投稿画像一覧", admin_post_images_path, class: 'nav-link text-white' %></li>
+          <li class="nav-item"><%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: 'nav-link text-white' %></li>
         <% else %>
-        <li class="nav-item"><%= link_to "ゲストログイン(閲覧用)", end_users_guest_sign_in_path,method: :post, class: 'nav-link text-white' %></li>
-        <li class="nav-item"><%= link_to "新規登録", new_end_user_registration_path, class: 'nav-link text-white' %></li>
-        <li class="nav-item"><%= link_to "ログイン", new_end_user_session_path, class: 'nav-link text-white' %></li>
+          <li class="nav-item"><%= link_to "ゲストログイン(閲覧用)", end_users_guest_sign_in_path,method: :post, class: 'nav-link text-white' %></li>
+          <li class="nav-item"><%= link_to "新規登録", new_end_user_registration_path, class: 'nav-link text-white' %></li>
+          <li class="nav-item"><%= link_to "ログイン", new_end_user_session_path, class: 'nav-link text-white' %></li>
         <% end %>
       </ul>
     </div>
