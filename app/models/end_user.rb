@@ -15,19 +15,24 @@ class EndUser < ApplicationRecord
 
   has_one_attached :profile_image
 
-  def self.guest#ゲストユーザの作成
-    find_or_create_by!(name: "ゲストユーザ",email: "guest@example.com") do |end_user|
-      end_user.password = SecureRandom.urlsafe_base64
-      end_user.name = "ゲストユーザ"
-    end
-  end
-
   def get_profile_image(width, height)
     unless profile_image.attached?
       file_path = Rails.root.join('app/assets/images/no_image.jpg')
       profile_image.attach(io: File.open(file_path), filename: 'default-image.jpg', content_type: 'image/jpeg')
     end
     profile_image.variant(resize_to_limit: [width, height]).processed
+  end
+
+  def self.guest#ゲストユーザの作成
+    find_or_create_by!(
+      name:"ナチュラ君",
+      email:"guest@example.com",
+      introduction:"どうも、ナチュラですゲコ。僕を通じて投稿の閲覧、いいね、コメントの利用ができるゲコ。（※こちらは閲覧用アカウントです）",
+    ) do |end_user|
+      end_user.password = SecureRandom.urlsafe_base64
+      end_user.name = "ナチュラ君"
+      end_user.profile_image.attach(io: File.open(Rails.root.join("app/assets/images/guest.jpeg")), filename: "guest.jpeg")
+    end
   end
 
 end

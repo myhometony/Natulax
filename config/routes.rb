@@ -10,13 +10,17 @@ Rails.application.routes.draw do
     sessions: "public/sessions"
   }
 
+  devise_scope :admin do
+    get :"admin/", to: "admin/sessions#new"
+  end
+
   devise_scope :end_user do
     post :"end_users/guest_sign_in", to: "public/sessions#guest_sign_in"
   end
 
   namespace :admin do
     resources :end_users, only:[:index, :show, :update]
-    resources :categories, only:[:index, :create, :edit, :update, :destroy]
+    resources :categories, only:[:index, :create, :edit, :update]
     resources :post_images, only:[:index, :show, :destroy] do
       resources :comments, only:[:destroy]
     end

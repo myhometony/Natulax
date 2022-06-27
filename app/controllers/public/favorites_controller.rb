@@ -5,6 +5,7 @@ class Public::FavoritesController < ApplicationController
     favorite = current_end_user.favorites.new(post_image_id: post_image.id)
     favorite.save
     redirect_to request.referer
+    flash[:notice] = "いいね しました。"
   end
 
   def destroy
@@ -12,6 +13,7 @@ class Public::FavoritesController < ApplicationController
     favorite = current_end_user.favorites.find_by(post_image_id:post_image.id)
     favorite.destroy
     redirect_to request.referer
+    flash[:notice] = "いいね を取り消しました。"
   end
 
 end

@@ -5,7 +5,7 @@
     </div>
     <div class="col-4 m-3">
       <p>
-        <%= link_to admin_end_user_path do %>
+        <%= link_to admin_end_user_path(@post_image.end_user.id) do %>
           <%= image_tag @post_image.end_user.get_profile_image(100,100),class:"rounded-circle border" %>
           <%= @post_image.end_user.name %>
         <% end %>

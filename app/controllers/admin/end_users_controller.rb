@@ -17,7 +17,8 @@ class Admin::EndUsersController < ApplicationController
   def update
     @end_user = EndUser.find(params[:id])
     @end_user.update(end_user_params)
-    redirect_to admin_end_user_path
+    flash[:notice] = "ステータスが更新されました。"
+    redirect_to request.referer
   end
 
   private

@@ -14,8 +14,13 @@ class Public::PostImagesController < ApplicationController
   def create
     @post_image = PostImage.new(post_image_params)
     @post_image.end_user_id = current_end_user.id
-    @post_image.save!
-    redirect_to public_post_images_path
+    if @post_image.save
+      flash[:notice] = "投稿できました。"
+      redirect_to public_end_user_path(current_end_user.id)
+    else
+      flash[:alert] = "投稿画像が選択されていません。"
+      redirect_to request.referer
+    end
   end
 
   def show
@@ -30,12 +35,14 @@ class Public::PostImagesController < ApplicationController
   def update
     @post_image = PostImage.find(params[:id])
     @post_image.update(post_image_params)
+    flash[:notice] = "更新できました。"
     redirect_to public_post_image_path
   end
 
   def destroy
     @post_image = PostImage.find(params[:id]).destroy
-    redirect_to public_post_images_path
+    redirect_to public_end_user_path(current_end_user.id)
+    flash[:notice] = "投稿を削除しました。"
   end
 
   private

@@ -6,8 +6,8 @@ class ApplicationController < ActionController::Base
   end
 
   def guest?#ゲストユーザの利用制限
-    if current_end_user.name == "ゲストユーザ"
-      redirect_to public_post_images_path, notice:"ゲストユーザではご利用いただけません。"
+    if current_end_user.name == "ナチュラ君"
+      redirect_to public_post_images_path, alert:"僕ではその機能は利用できないゲコ‥"
     end
   end
 

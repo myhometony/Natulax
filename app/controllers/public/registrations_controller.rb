@@ -5,7 +5,7 @@ class Public::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_account_update_params, only: [:update]
 
   def after_sign_up_path_for(resource)
-    public_post_images_path
+    public_end_user_path(current_end_user.id)
   end
 
   # GET /resource/sign_up

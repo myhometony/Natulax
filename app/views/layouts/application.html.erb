@@ -13,24 +13,14 @@
 
   <body class="d-flex flex-column vh-100">
 
-    <header class="bg-success">
-      <%= render 'layouts/header' %>
-    </header>
+    <header class="bg-success"><%= render 'layouts/header' %></header>
 
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-    <% if flash[:danger] %><p class="text-red"><%= flash[:danger] %></p><% end %>
+    <p class="notice text-success text-center m-3"><%= notice %></p>
+    <p class="alert text-danger text-center"><%= alert %></p>
 
-    <main class="mb-auto text-break">
-      <%= yield %>
-    </main>
+    <main class="mb-auto text-break"><%= yield %></main>
 
-    <footer class="bg-success pt-5 pb-4">
-      <% if admin_signed_in? %>
-      <% else %>
-       <%= link_to "ログイン", new_admin_session_path %>
-      <% end %>
-    </footer>
+    <footer class="bg-success pt-5 pb-4"></footer>
 
   </body>
 </html>

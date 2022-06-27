@@ -21,8 +21,13 @@ class Public::EndUsersController < ApplicationController
 
   def update
     @end_user = EndUser.find(params[:id])
-    @end_user.update(end_user_params)
-    redirect_to public_end_user_path
+    if @end_user.update(end_user_params)
+      redirect_to public_end_user_path
+      flash[:notice] = "プロフィールが更新されました。"
+    else
+      flash[:alert] = "更新に失敗しました。"
+      redirect_to request.referer
+    end
   end
 
   def unsubscribe
@@ -34,6 +39,7 @@ class Public::EndUsersController < ApplicationController
     @end_user.update(is_active: false)
     reset_session
     redirect_to root_path
+    flash[:notice] = "退会しました。"
   end
 
   private
