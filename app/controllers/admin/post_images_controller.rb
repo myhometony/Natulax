@@ -11,15 +11,10 @@ class Admin::PostImagesController < ApplicationController
     @comment = Comment.new
   end
 
-  def update
-    @post_image = PostImage.find(params[:id])
-    @post_image.update(post_image_params)
-    redirect_to admin_post_image_path
-  end
-
   def destroy
     @post_image = PostImage.find(params[:id]).destroy
     redirect_to admin_post_images_path
+    flash[:notice] = "投稿を削除しました。"
   end
 
   private
