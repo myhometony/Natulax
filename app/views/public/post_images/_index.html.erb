@@ -13,15 +13,9 @@
           <%= post_image.end_user.name %>
         <% end %>
          |
-        <% if post_image.favorited_by?(current_end_user) %>
-          <%= link_to public_post_image_favorites_path(post_image), method: :delete do %>
-            <i class="fa-solid fa-heart text-danger"></i><%= post_image.favorites.count %> いいね
-          <% end %>
-        <% else %>
-          <%= link_to public_post_image_favorites_path(post_image), method: :post do %>
-            ♡<%= post_image.favorites.count %> いいね
-          <% end %>
-        <% end %>
+        <span class="favorite-btn_<%= post_image.id %>">
+          <%= render 'public/favorites/favorite-btn', post_image: post_image %>
+        </span>
          |
         <%= link_to  public_post_image_path(post_image.id) do %>
           <i class="fa-regular fa-comment-dots"></i><%= post_image.comments.count %> コメント

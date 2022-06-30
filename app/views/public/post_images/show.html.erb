@@ -14,19 +14,13 @@
       <p>説明文：<%= @post_image.caption %></p>
       <p>カテゴリ：<%= @post_image.category.name %></p>
       <p>投稿日：<%= @post_image.created_at.strftime('%Y.%m.%d') %></p>
-      <p>
-        <% if @post_image.favorited_by?(current_end_user) %>
-          <%= link_to public_post_image_favorites_path(@post_image), method: :delete do %>
-            <i class="fa-solid fa-heart text-danger"></i><%= @post_image.favorites.count %> いいね
-          <% end %>
-        <% else %>
-          <%= link_to public_post_image_favorites_path(@post_image), method: :post do %>
-            ♡<%= @post_image.favorites.count %> いいね
-          <% end %>
-        <% end %>
-        |
+      <span class="favorite-btn_<%= @post_image.id %>">
+        <%= render 'public/favorites/favorite-btn', post_image: @post_image %>
+      </span>
+      |
+      <span>
         <i class="fa-regular fa-comment-dots"></i><%= @post_image.comments.count %>コメント
-      </p>
+      </span>
       <% if @post_image.end_user == current_end_user %>
         <%= link_to "編集", edit_public_post_image_path(@post_image),class:"btn btn-success" %>
         <%= link_to "削除", public_post_image_path(@post_image), method: :delete,class:"btn btn-danger" %>

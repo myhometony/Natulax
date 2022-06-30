@@ -1,0 +1,9 @@
+<% if post_image.favorited_by?(current_end_user) %>
+    <%= link_to public_post_image_favorites_path(post_image), method: :delete, remote: true do %>
+      <i class="fa-solid fa-heart text-danger"></i><%= post_image.favorites.count %> いいね
+    <% end %>
+  <% else %>
+    <%= link_to public_post_image_favorites_path(post_image), method: :post, remote: true do %>
+      ♡<%= post_image.favorites.count %> いいね
+    <% end %>
+<% end %>
