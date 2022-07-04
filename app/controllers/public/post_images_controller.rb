@@ -15,6 +15,10 @@ class Public::PostImagesController < ApplicationController
     @post_image = PostImage.new(post_image_params)
     @post_image.end_user_id = current_end_user.id
     if @post_image.save
+      categories = Vision.get_image_data(@post_image.image)
+      categories.each do |category|
+        @post_image.categories.create(name: category)
+      end
       flash[:notice] = "投稿できました。"
       redirect_to public_end_user_path(current_end_user.id)
     else
@@ -48,7 +52,7 @@ class Public::PostImagesController < ApplicationController
   private
 
   def post_image_params
-    params.require(:post_image).permit(:image, :end_user_id, :category_id, :title, :caption)
+    params.require(:post_image).permit(:image, :end_user_id, :title, :caption)
   end
 
 end

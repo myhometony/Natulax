@@ -10,22 +10,6 @@ Admin.create!(
   password: 'aaaaaa'
 )
 
-categories = Category.create!(
-  [
-  {name: '山'},#0
-  {name: '森'},#1
-  {name: '草原'},#2
-  {name: '草木'},#3
-  {name: '花'},#4
-  {name: '動物・生き物'},#5
-  {name: '海'},#6
-  {name: '湖'},#7
-  {name: '川'},#8
-  {name: '空'},#9
-  {name: 'その他'},#10
-  ]
-)
-
 users = EndUser.create!(
   [
     {
@@ -71,7 +55,6 @@ post_images = PostImage.create!(
       title: '散歩先にて',
       image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/sample_images/sample-post1.jpg"), filename:"sample-post1.jpg"),
       caption: '小さくてかわいらしかったので撮影して見ました！',
-      category_id: categories[4].id,
       end_user_id: users[0].id
       },
 
@@ -79,7 +62,6 @@ post_images = PostImage.create!(
       title: '小鳥',
       image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/sample_images/sample-post2.jpg"), filename:"sample-post2.jpg"),
       caption: 'いい感じに撮れたと思います。',
-      category_id: categories[5].id,
       end_user_id: users[1].id
       },
 
@@ -87,7 +69,6 @@ post_images = PostImage.create!(
       title: '',
       image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/sample_images/sample-post3.jpg"), filename:"sample-post3.jpg"),
       caption: '',
-      category_id: categories[1].id,
       end_user_id: users[2].id
       },
 
@@ -95,7 +76,6 @@ post_images = PostImage.create!(
       title: 'キレイな夕焼けでした！',
       image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/sample_images/sample-post4.jpg"), filename:"sample-post4.jpg"),
       caption: '仕事帰りにて一枚！',
-      category_id: categories[9].id,
       end_user_id: users[0].id
       },
 
@@ -103,7 +83,6 @@ post_images = PostImage.create!(
       title: '緑',
       image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/sample_images/sample-post5.jpg"), filename:"sample-post5.jpg"),
       caption: '先日、訪れたのですが、とても広大で緑豊かな土地でした。',
-      category_id: categories[1].id,
       end_user_id: users[1].id
       },
 
@@ -111,7 +90,6 @@ post_images = PostImage.create!(
       title: '',
       image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/sample_images/sample-post6.jpg"), filename:"sample-post6.jpg"),
       caption: '海外旅行に行ったときに撮ったものです。',
-      category_id: categories[6].id,
       end_user_id: users[3].id
       },
   ]
