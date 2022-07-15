@@ -8,6 +8,12 @@ class Public::EndUsersController < ApplicationController
     #検索結果を取得
   end
 
+  def favorites
+    @end_user = EndUser.find(params[:id])
+    favorites= Favorite.where(end_user_id: @end_user.id).pluck(:post_image_id)#pluckでカラムの取得
+    @favorite_posts = PostImage.find(favorites)
+  end
+
   def show
     @end_user = EndUser.find(params[:id])
     @search = @end_user.post_images.ransack(params[:q])#キー(:q)を使ってテーブルから情報を取得

@@ -2,8 +2,8 @@ class Admin::PostImagesController < ApplicationController
 
   def index#一覧と検索結果を一体化してあります。
     @search = PostImage.ransack(params[:q])#キー(:q)を使ってテーブルから情報を取得
-    @results = @search.result.page(params[:page]).per(6).order(created_at: :desc)#orderで順番入れかえ
-    #検索結果を取得
+    @results = @search.result(distinct: true).page(params[:page]).per(6).order(created_at: :desc)
+    #resultで検索結果を取得 #distinctで結果の重複を避ける #orderで順番入れかえ
   end
 
   def show

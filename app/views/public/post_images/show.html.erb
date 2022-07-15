@@ -14,7 +14,7 @@
       <p>説明文：<%= @post_image.caption %></p>
       <p>カテゴリ：
       <% @post_image.categories.each do |category| %>
-        <span class="label"><%= category.name %></span>
+        <span class="label"><%= category.name %>,</span>
       <% end %></p>
       <p>投稿日：<%= @post_image.created_at.strftime('%Y.%m.%d') %></p>
       <span class="favorite-btn_<%= @post_image.id %>">

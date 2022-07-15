@@ -29,7 +29,11 @@ Rails.application.routes.draw do
   namespace :public do
     get :"end_users/unsubscribe", to: "end_users#unsubscribe"
     patch :"end_users/withdraw", to: "end_users#withdraw"
-    resources :end_users, only:[:index, :show, :edit, :update]
+    resources :end_users, only:[:index, :show, :edit, :update]do
+      member do
+        get :favorites
+      end
+    end
     resources :post_images do
       resource :favorites, only:[:create, :destroy]
       resources :comments, only:[:create, :destroy]
