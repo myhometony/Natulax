@@ -1,2 +1,1 @@
-$('.comment-index_<%= @post_image.id %>').html("<%= j(render 'public/comments/comment-index', post_image: @post_image, comment: @comment) %>");
-$('.text_area').val('');
+$('.comment-index_<%= @post_image.id %>').html("<%= j(render 'public/comments/comment-index', post_image: @post_image) %>");

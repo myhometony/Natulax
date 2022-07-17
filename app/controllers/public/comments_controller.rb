@@ -12,6 +12,7 @@ class Public::CommentsController < ApplicationController
   end
 
   def destroy
+    @post_image = PostImage.find(params[:post_image_id])
     Comment.find(params[:id]).destroy
   end
 

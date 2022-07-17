@@ -1,2 +1,6 @@
-いいね一覧
-<%= render "public/post_images/index", post_images:@favorite_posts %>
+<h4>いいね一覧</h4>
+<% if @favorite_posts.length !=0 %>
+  <%= render "public/post_images/index", post_images:@favorite_posts %>
+<% else %>
+  <div class="m-4">該当する投稿が見つかりませんでした。</div>
+<% end %>

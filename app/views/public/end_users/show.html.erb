@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-3 m-3">
+  <div class="col-3 pr-0 pl-4">
     <h4 class="ml-4"><%= @end_user.name %></h4>
     <%= image_tag @end_user.get_profile_image(100,100),class:"rounded-circle border m-1" %>
     <table class="table text-center">
@@ -33,17 +33,17 @@
         <p><%= link_to "プロフィール編集", edit_public_end_user_path(@end_user),class:"btn btn-success" %></p>
       <% end %>
     <% end %>
-    <p><%= link_to"お気に入り一覧",favorites_public_end_user_path(@end_user) %></p>
+    <p><%= link_to favorites_public_end_user_path(@end_user) do %><i class="fa-solid fa-heart text-danger"></i>いいね一覧<% end %></p>
   </div>
 
-  <div class="col-8">
+  <div class="col-9 pl-0">
     <h3>投稿一覧</h3>
     <%= render 'public/post_images/search_form', search:@search, url: public_end_user_path %>
     <% if @results.length !=0 %>
       <%= render 'public/post_images/index', post_images:@results %>
       <%= paginate @results %>
     <% else %>
-    該当する投稿が見つかりませんでした。
+    <div class="m-4">該当する投稿が見つかりませんでした。</div>
     <% end %>
   </div>
 

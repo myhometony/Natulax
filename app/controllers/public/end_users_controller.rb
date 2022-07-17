@@ -10,7 +10,7 @@ class Public::EndUsersController < ApplicationController
 
   def favorites
     @end_user = EndUser.find(params[:id])
-    favorites= Favorite.where(end_user_id: @end_user.id).pluck(:post_image_id)#pluckでカラムの取得
+    favorites= Favorite.where(end_user_id: @end_user.id).order(created_at: :desc).pluck(:post_image_id)#pluckでカラムの取得
     @favorite_posts = PostImage.find(favorites)
   end
 
