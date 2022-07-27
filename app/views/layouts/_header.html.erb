@@ -16,7 +16,6 @@
           <li class="nav-item"><%= link_to "ログアウト", destroy_end_user_session_path, method: :delete, class: 'nav-link text-white' %></li>
         <% elsif admin_signed_in? %>
           <li class="nav-item"><%= link_to "ユーザ一覧", admin_end_users_path, class: 'nav-link text-white' %></li>
-          <li class="nav-item"><%= link_to "カテゴリ一覧", admin_categories_path, class: 'nav-link text-white' %></li>
           <li class="nav-item"><%= link_to "投稿画像一覧", admin_post_images_path, class: 'nav-link text-white' %></li>
           <li class="nav-item"><%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: 'nav-link text-white' %></li>
         <% else %>
