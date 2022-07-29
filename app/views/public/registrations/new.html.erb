@@ -3,7 +3,7 @@
   <%= form_with model:@end_user, url:end_user_registration_path do |f| %>
   <%= render "public/shared/error_messages", resource: resource %>
   <div>
-    <%= f.label :ユーザー名 %><br />
+    <%= f.label :ユーザ名 %><br />
     <%= f.text_field :name, placeholder:"ユーザ名を入力" %>
   </div>
   <div>

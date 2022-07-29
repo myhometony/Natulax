@@ -34,6 +34,9 @@ class Public::PostImagesController < ApplicationController
 
   def edit
     @post_image = PostImage.find(params[:id])
+    if @post_image.end_user_id != current_end_user.id
+      redirect_to public_post_image_path
+    end
   end
 
   def update
@@ -44,7 +47,7 @@ class Public::PostImagesController < ApplicationController
   end
 
   def destroy
-    @post_image = PostImage.find(params[:id]).destroy
+    PostImage.find(params[:id]).destroy
     redirect_to public_end_user_path(current_end_user.id)
     flash[:notice] = "投稿を削除しました。"
   end
