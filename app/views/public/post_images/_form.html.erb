@@ -1,5 +1,6 @@
   <div class="row">
     <%= form_with model: post_image, url:url do |f| %>
+    <%= render 'layouts/error_messages', model: f.object %>
     <div class="form_group mt-3">
       <label for="inputImage">投稿画像</label>
       <%= f.file_field :image, accept: "image/*", id:"inputImage",class:"form-control-file" %>

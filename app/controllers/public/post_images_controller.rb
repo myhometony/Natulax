@@ -22,8 +22,7 @@ class Public::PostImagesController < ApplicationController
       flash[:notice] = "投稿できました。"
       redirect_to public_end_user_path(current_end_user.id)
     else
-      flash[:alert] = "投稿画像が選択されていません。"
-      redirect_to request.referer
+      render "new"
     end
   end
 

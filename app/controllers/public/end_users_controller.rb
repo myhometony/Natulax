@@ -31,8 +31,7 @@ class Public::EndUsersController < ApplicationController
       redirect_to public_end_user_path
       flash[:notice] = "プロフィールが更新されました。"
     else
-      flash[:alert] = "更新に失敗しました。"
-      redirect_to request.referer
+      render "edit"
     end
   end
 
